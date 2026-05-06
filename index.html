@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RupeeTracker — Student Expense Tracker</title>
+  <meta name="description" content="A lightweight, offline-first expense tracker for Indian students. No login, no cloud." />
+  <link rel="stylesheet" href="src/style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>💸 Rupee<span>Tracker</span></h1>
+    <button class="theme-toggle" id="theme-toggle">☀️ Light</button>
+  </header>
+
+  <main>
+
+    <!-- Summary Cards -->
+    <div class="summary-cards">
+      <div class="card income">
+        <div class="label">Total Income</div>
+        <div class="amount" id="total-income">₹0</div>
+      </div>
+      <div class="card expense">
+        <div class="label">Total Expenses</div>
+        <div class="amount" id="total-expense">₹0</div>
+      </div>
+      <div class="card balance">
+        <div class="label">Balance</div>
+        <div class="amount" id="balance">₹0</div>
+      </div>
+    </div>
+
+    <!-- Add Transaction Form -->
+    <div class="add-form">
+      <h2>Add Transaction</h2>
+      <form id="tx-form" autocomplete="off">
+
+        <div class="radio-group" style="margin-bottom:12px">
+          <input type="radio" name="type" id="r-expense" value="expense" checked />
+          <label for="r-expense">💸 Expense</label>
+          <input type="radio" name="type" id="r-income" value="income" />
+          <label for="r-income">💰 Income</label>
+        </div>
+
+        <div class="form-row">
+          <input type="text" id="desc" placeholder="Description (e.g. Vada Pav)" required maxlength="60" />
+          <input type="number" id="amount" placeholder="Amount (₹)" min="1" step="0.01" required />
+          <input type="date" id="date" required />
+        </div>
+
+        <div class="form-row two">
+          <select id="category">
+            <option value="food">🍱 Food & Drinks</option>
+            <option value="transport">🚌 Transport</option>
+            <option value="education">📚 Education</option>
+            <option value="entertainment">🎮 Entertainment</option>
+            <option value="health">💊 Health</option>
+            <option value="salary">💰 Salary / Income</option>
+            <option value="others">📌 Others</option>
+          </select>
+          <button class="btn" type="submit">+ Add</button>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Spending by Category -->
+    <div class="card chart-bar-wrap">
+      <div class="section-header">
+        <h2>Spending by Category</h2>
+      </div>
+      <div id="category-chart">
+        <div style="color:var(--muted);font-size:0.88rem;padding:8px 0">No expenses to show.</div>
+      </div>
+    </div>
+
+    <!-- Transactions List -->
+    <div>
+      <div class="section-header">
+        <h2>Transactions</h2>
+        <div class="filter-row">
+          <input type="month" id="month-filter" />
+          <button class="export-btn" onclick="exportCSV()">⬇ Export CSV</button>
+        </div>
+      </div>
+      <div class="transactions" id="tx-list">
+        <div class="empty-state">
+          <div class="emoji">💸</div>
+          <p>No transactions yet. Add one above!</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="src/app.js"></script>
+</body>
+</html>
